@@ -1,0 +1,70 @@
+1. Create table
+
+stud(id,name) (use I'd as primary key)
+
+create table stud1(eid primary key,name text);
+
+2. Insert minimum 10 records for each table.
+
+sqlite> insert into stud1 values(1,'om');
+sqlite> insert into stud1 values(2,'sai');
+sqlite> insert into stud1 values(3,'ram');
+sqlite> insert into stud1 values(4,'radha');
+sqlite> insert into stud1 values(5,'param');
+sqlite> insert into stud1 values(6,'hiten');
+sqlite> insert into stud1 values(7,'mit');
+sqlite> insert into stud1 values(8,'kush');
+sqlite> insert into stud1 values(9,'harsh');
+sqlite> insert into stud1 values(10,'parth');
+
+1. Create table
+
+stud_details(id,city,mobileno) (Use I'd as foreign key)
+
+sqlite> create table stud_detalis(eid int primary key,city text,moblie number,foreign key(eid) references stud1(eid));
+
+2. Insert minimum 10 records for each table
+
+sqlite> insert into stud_detalis values(1,'surat',6446546789);
+sqlite> insert into stud_detalis values(2,'bardoli',3244571232);
+sqlite> insert into stud_detalis values(3,'baben',1654646578);
+sqlite> insert into stud_detalis values(4,'vyara',6634327384);
+sqlite> insert into stud_detalis values(5,'madhi',6347886790);
+sqlite> insert into stud_detalis values(6,'mahuva',9929384756);
+sqlite> insert into stud_detalis values(7,'bardoli',7788665522);
+sqlite> insert into stud_detalis values(8,'surat',5544337701);
+sqlite> insert into stud_detalis values(9,'madhi',9453637249);
+sqlite> insert into stud_detalis values(10,'baben',7856452378);
+
+3. Display whose student come from the Surat City.
+
+sqlite> select stud1.eid,name,city,moblie from stud_detalis inner join stud1 on stud1.eid=stud_detalis.eid and city='surat';
+1|om|surat|6446546789
+8|kush|surat|5544337701
+
+4. Display student details whose city name start with 'B'.
+
+sqlite> select stud1.eid,name,city,moblie from stud_detalis inner join stud1 on stud1.eid=stud_detalis.eid and city like 'b%';
+2|sai|bardoli|3244571232
+3|ram|baben|1654646578
+7|mit|bardoli|7788665522
+10|parth|baben|7856452378
+
+5. Update mobileno who are comming from 'Surat'
+ 
+update stud_detalis set moblie=8511787718 where city='surat';
+
+6. Display all record.
+
+sqlite> select * from stud_detalis;
+
+1|surat|8511787718
+2|bardoli|3244571232
+3|baben|1654646578
+4|vyara|6634327384
+5|madhi|6347886790
+6|mahuva|9929384756
+7|bardoli|7788665522
+8|surat|8511787718
+9|madhi|9453637249
+10|baben|7856452378
